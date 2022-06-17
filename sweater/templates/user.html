@@ -1,20 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Страница пользователя
+    Страница пользователя
+{% endblock %}
+
+{% block userlogin %}
+    <form>
+        <span><a href="{{ url_for('profile') }}">{{ current_user.get_name() }}</a></span>
+        <button class="btn btn-outline-primary me-2" formaction="/logout">Выйти</button>
+    </form>
 {% endblock %}
 
 {% block body %}
-<link href="{{ url_for('static', filename='css/main.css')}}" rel="stylesheet"/>
-<div class="container">
-    <h6>{{user.first_name}} {{user.last_name}}</h6>
-    <form method="post">
-        <input type="text" name="chatName" id="chatName">
-        <button type="submit" formaction="/user/{{user.id}}/new_chat">Новый чат</button>
+    <form>
+        <button class="btn btn-outline-primary me-2" formaction="/chats">Список чатов</button>
     </form>
-    <h6>Текущие чаты</h6>
-    {% for chat in chats %}
-    <p><a href="/user/{{user.id}}/{{chat[0].chat_id}}"> {{chat[1].name}}</a></p>
-    {% endfor %}
-</div>
 {% endblock %}

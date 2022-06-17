@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Главная страница
+    Главная страница
 {% endblock %}
 
-{% block body %}
-<div class="container align-items-center">
-    <a href="/login">Войти</a>
-    <a href="/registration">Зарегистрироваться</a>
-</div>
+{% block userlogin %}
+    <form>
+        <button class="btn btn-outline-primary me-2" formaction="/login">Войти</button>
+        <button class="btn btn-primary" formaction="/registration">Регистрация</button>
+    </form>
 {% endblock %}

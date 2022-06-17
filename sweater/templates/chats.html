@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Страница пользователя
+{% endblock %}
+
+{% block userlogin %}
+    <form>
+        <span><a href="{{ url_for('profile') }}">{{ current_user.get_name() }}</a></span>
+        <button class="btn btn-outline-primary me-2" formaction="/logout">Выйти</button>
+    </form>
+{% endblock %}
+
+{% block body %}
+    <ul class="list-group container">
+        {% for chat in chats %}
+            <li class="list-group-item">
+                <a href="{{ url_for('show_chat', chat_id=chat[1].id) }}">{{ chat[1].name }}</a>
+            </li>
+        {% endfor %}
+        <form method="post">
+            {{ cht_form.hidden_tag() }}
+            <div class="row">
+                <div class="col">
+                    {{ cht_form.name.label() }}
+                    {{ cht_form.name() }}
+                </div>
+                <div class="col">
+                    {{ cht_form.submit() }}
+                </div>
+            </div>
+        </form>
+    </ul>
+{% endblock %}

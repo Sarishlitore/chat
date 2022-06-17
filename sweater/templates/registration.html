@@ -1,29 +1,29 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Регистрация
+    Регистрация
+{% endblock %}
+
+{% block userlogin %}
+    <form>
+        <button class="btn btn-outline-primary me-2" formaction="/login">Войти</button>
+    </form>
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="align-items-center">
-        <form class="row" method="post">
-            <div class="form-floating mb-1 col-md-4">
-                <input type="text" name="firstName" id="firstName" class="form-control" required>
-                <label for="firstName">Имя</label>
-            </div>
-            <div class="form-floating mb-1 col-md-4">
-                <input type="text" name="lastName" id="lastName" class="form-control" required>
-                <label for="lastName">Фамилия</label>
-            </div>
-            <div class="form-floating mb-1 col-md-4">
-                <input type="text" name="login" id="login" class="form-control" required>
-                <label for="login">Логин</label>
-            </div>
-            <div class="col-12 d-flex  justify-content-center">
-                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-            </div>
-        </form>
-    </div>
-</div>
+    <form method="post" class="container">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+            <p>{{ field.label() }}
+            {% if field.errors %}
+                {{ field() }}
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            {% else %}
+                {{ field() }}
+            {% endif %}
+        {% endfor %}
+        <p>{{ form.submit() }}
+    </form>
 {% endblock %}
